@@ -1,0 +1,25 @@
+---
+description: R3F and Three.js performance and architecture rules (Biome cannot lint useFrame allocations).
+globs: src/components/three/**/*.{ts,tsx},src/components/ui/comet-card.tsx,src/components/orby/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# React Three Fiber
+
+There is no Three.js language server. TypeScript plus these rules are the review bar.
+
+Lint is Biome. Do **not** add ESLint or `@react-three/eslint-plugin` to this repo. Enforce the same two R3F rules by review:
+
+- Never `new THREE.*` inside `useFrame` (geometry, material, vector, color, or other allocations).
+- Never `.clone()` vectors/matrices/colors inside `useFrame`. Mutate refs created outside the loop.
+
+Also required:
+
+- Use R3F / `@react-three/drei` only. No imperative `THREE.Scene` / `THREE.WebGLRenderer` outside the R3F tree.
+- `useMemo` geometries, positions, and materials. Dispose on unmount.
+- Canvas: `dpr={[1, 2]}`, `performance={{ min: 0.5 }}`.
+- `prefers-reduced-motion` must stop `useFrame` spin and Float.
+- Viewport under 768px: halve particle counts, skip postprocessing.
+- Page canvases that are decorative: `pointer-events: none` and content at `z-index: 1+`.
+
+After substantive edits in these globs, run the `three-artist` and `react-reviewer` subagents.

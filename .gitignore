@@ -2,16 +2,29 @@
 
 sanity.types.ts
 
-# IDE / agent config (local state, secrets)
-.cursor/
+# Local agent/IDE state and secrets
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+!.cursor/config/
+!.cursor/config/**
+!.cursor/agents/
+!.cursor/agents/**
+!.cursor/commands/
+!.cursor/commands/**
+!.cursor/skills/
+!.cursor/skills/**
+!.cursor/settings.json
+.cursor/**/*.log
 .claude/
 .codex/
 .kiro/
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .mcp.json
 .mcp.example.json
 codex/
-AGENTS.md
 CLAUDE.md
 
 # dependencies

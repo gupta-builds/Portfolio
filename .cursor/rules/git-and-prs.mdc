@@ -1,0 +1,15 @@
+---
+description: One-concern git branches and PRs. Do not stack unrelated work.
+alwaysApply: true
+---
+
+# Git and pull requests
+
+- One concern per branch and PR. Name branches `chore/…`, `fix/…`, `feat/…`, `docs/…` from the topic, not a catch-all (`post-frontend` is the anti-pattern).
+- Branch from up-to-date `main`. Do not pile a tooling change onto an unrelated feature branch.
+- Commit only when the user asks. Message says why, not a file dump.
+- Do not amend pushed commits, force-push `main`, or skip hooks unless the user explicitly asks.
+- Do not delete old feature branches after merge. Leave them as historical refs; the user retires them.
+- Do not rewrite README, app code, and Cursor config in the same PR unless the user asked for that mix.
+- Before opening a PR: `pnpm lint`, `pnpm typecheck`, and tests for the touched area.
+- Bugbot reviews GitHub PRs after the user enables the repo in Cursor Automations. Do not assume Bugbot is on.

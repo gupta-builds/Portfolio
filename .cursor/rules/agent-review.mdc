@@ -1,0 +1,23 @@
+---
+description: When to invoke Cursor review subagents for this portfolio.
+alwaysApply: true
+---
+
+# Agent review routing
+
+After a non-trivial implementation (not a one-line copy change), run the matching reviewers before claiming done. Do not skip because the same model wrote the code.
+
+| Change | Subagent |
+|--------|----------|
+| `.ts` / `.tsx` types, async, APIs | `typescript-reviewer` |
+| React components, hooks, RSC/client boundaries | `react-reviewer` |
+| `src/components/three/**`, comet-card, Orby canvas | `three-artist` |
+| Auth, cookies, env, routes, CSP, rate limits | `security-reviewer` |
+| Interactive UI, focus, keyboard, contrast | `a11y-architect` |
+| After code lands, before "done" | `portfolio-verify` |
+| Sanity schema/query/content UI | `portfolio-cms` |
+| Layout/visual polish only | `portfolio-polish` |
+
+On pull requests, Bugbot is the GitHub reviewer. In chat, `/review-bugbot` and `/review-security` are allowed when the user asks.
+
+Do not add ESLint. Use `pnpm lint` (Biome), `pnpm typecheck`, and `pnpm test` as the mechanical bar.
